@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Home = () => {
-  return <p>We have x users!</p>;
+const Home = props => {
+  return <p>We have {props.users.length} users!</p>;
 };
+
 
 export default Home;
