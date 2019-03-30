@@ -9,11 +9,13 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "express": "^4.16.4",
+    "pg": "^7.9.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
+    "sequelize": "^5.2.7",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },
@@ -29,7 +31,8 @@
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --mode=development --watch",
-    "start:dev": "npm run webpack:dev & nodemon server.js --ignore src/ --ignore dist/"
+    "start:dev": "npm run webpack:dev & nodemon server.js --ignore src/ --ignore dist/",
+    "seed": "node src/db/seed.js"
   },
   "keywords": [],
   "author": "",
