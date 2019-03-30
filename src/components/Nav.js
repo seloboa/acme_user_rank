@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
 import {NavLink, Route} from 'react-router-dom';
 import Users from './Users';
-import UserForm from './UserForm'
+import UserForm from './UserForm';
+import Home from './Home';
 
 const Nav = () => {
   return (
@@ -28,9 +29,9 @@ const Nav = () => {
           </NavLink>
         </li>
       </ul>
-      <Route exact path={'/'} render={() => <p>We have x users!</p>} />
+      <Route exact path={'/'} component={Home} />
       <Route exact path={'/users'} component={Users} />
-      <Route path ={'/users/create'} component={UserForm}></Route>
+      <Route path={'/users/create'} component={UserForm} />
     </Fragment>
   );
 };
