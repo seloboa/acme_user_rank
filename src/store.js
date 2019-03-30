@@ -10,16 +10,18 @@ const initialState = {
 const GET_USERS = 'GET_USERS';
 
 //action creators
-const getUsers = () => ({
+const getUsers = users => ({
   type: GET_USERS,
   users,
 });
 
 //thunk
-export const getUsersFromDb = async dispatch => {
-  const response = await axios.get('/api/users');
-  const users = response.data;
-  dispatch(getUsers(users));
+export const getUsersFromDb = () => {
+  return async dispatch => {
+    const response = await axios.get('/api/users');
+    const users = response.data;
+    dispatch(getUsers(users));
+  };
 };
 
 //reducer
