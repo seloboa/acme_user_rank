@@ -12,7 +12,6 @@ const Nav = props => {
     }
     return acc;
   }, []);
-  console.log(topRankedUsers);
   return (
     <Fragment>
       <ul className="nav nav-tabs" style={{marginBottom: '10px'}}>
