@@ -22,7 +22,7 @@ const Nav = props => {
         </li>
         <li className="nav-item">
           <NavLink exact to={'/users'} className={'nav-link'}>
-            Users
+            Users ({(props.users.length)})
           </NavLink>
         </li>
         <li className="nav-item">

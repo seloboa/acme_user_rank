@@ -2,7 +2,7 @@ const db = require('./db');
 const User = require('./User');
 
 const syncAndSeed = () => {
-  db.sync()
+  db.sync({force:true})
     .then(() => {
       return Promise.all([
         User.create({name: 'moe', bio: 'moe is fun', rank: 1}),

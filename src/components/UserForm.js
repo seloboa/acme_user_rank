@@ -4,10 +4,14 @@ import {connect} from 'react-redux';
 import {writeInfo, postUserToDb} from '../store';
 
 const UserForm = props => {
-  const {name, bio, rank, write} = props;
+  const {name, bio, rank, write, post} = props;
   return (
-    <form onSubmit={e =>{e.preventDefault();
-    }}>
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        post({name, bio, rank});
+      }}
+    >
       <input
         className="form-control"
         placeholder="name"
@@ -31,7 +35,9 @@ const UserForm = props => {
         value={rank > 0 ? rank : ''}
       />
       <div className="btn-group" style={{marginTop: '10px'}}>
-        <button className="btn btn-primary" type='submit'>Create</button>
+        <button className="btn btn-primary" type="submit">
+          Create
+        </button>
         <Link to="/users">
           <button className="btn btn-info">Cancel</button>
         </Link>
@@ -49,6 +55,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   write: (field, data) => dispatch(writeInfo(field, data)),
+  post: data => dispatch(postUserToDb(data)),
 });
 
 export default connect(

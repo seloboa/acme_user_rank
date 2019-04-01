@@ -6,6 +6,9 @@ const User = require('./src/db/User');
 
 const port = process.env.PORT || 3000;
 
+//data parser
+app.use(express.json());
+
 app.get('/app.js', (req, res, next) =>
   res.sendFile(path.join(__dirname, 'dist', 'main.js'))
 );
@@ -28,8 +31,7 @@ app.post('/api/users',async(req,res,next)=>{
   try{
     await db.sync();
     const newUser = await User.create(req.body);
-    console.log(newUser);
-    res.json(newUser);
+    res.json(newUser.get());
   }catch(err){
     next(err);
   }

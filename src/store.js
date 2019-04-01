@@ -61,6 +61,13 @@ const reducer = (state = initialState, action) => {
       return {...state, bio: action.data};
     case WRITE_RANK:
       return {...state, rank: action.data};
+    case GET_POSTED_USER:
+      return {
+        ...state,
+        name: action.user.name,
+        bio: action.user.bio,
+        rank: action.user.rank,
+      };
     default:
       return state;
   }
