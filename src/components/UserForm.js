@@ -4,9 +4,10 @@ import {connect} from 'react-redux';
 import {writeInfo} from '../store';
 
 const UserForm = props => {
-  const {users, name, bio, rank, write} = props;
+  const {name, bio, rank, write} = props;
   return (
-    <form>
+    <form onSubmit={e =>{e.preventDefault();
+    }}>
       <input
         className="form-control"
         placeholder="name"
@@ -14,10 +15,23 @@ const UserForm = props => {
         onChange={event => write(event.target.name, event.target.value)}
         value={name}
       />
-      <input className="form-control" placeholder="bio" name="WRITE_BIO" />
-      <input className="form-control" placeholder="rank" name="WRITE_RANK" />
+      <input
+        className="form-control"
+        placeholder="bio"
+        name="WRITE_BIO"
+        onChange={event => write(event.target.name, event.target.value)}
+        value={bio}
+      />
+      <input
+        type="number"
+        className="form-control"
+        placeholder="rank"
+        name="WRITE_RANK"
+        onChange={event => write(event.target.name, event.target.value)}
+        value={rank > 0 ? rank : ''}
+      />
       <div className="btn-group" style={{marginTop: '10px'}}>
-        <button className="btn btn-primary">Create</button>
+        <button className="btn btn-primary" type='submit'>Create</button>
         <Link to="/users">
           <button className="btn btn-info">Cancel</button>
         </Link>
