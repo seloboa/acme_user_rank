@@ -4,10 +4,6 @@ import {connect} from 'react-redux';
 import {getUsersFromDb} from '../store';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.getUsersFromDb();
-  }
-
   render() {
     return (
       <div>
@@ -18,12 +14,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  users: state.users,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getUsersFromDb: () => dispatch(getUsersFromDb()),
-});
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App;

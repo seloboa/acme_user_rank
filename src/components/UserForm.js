@@ -5,6 +5,7 @@ import {writeInfo, postUserToDb} from '../store';
 
 const UserForm = props => {
   const {users, name, bio, rank, write, post, history, match} = props;
+  console.log(props);
   return (
     <form
       onSubmit={e => {
