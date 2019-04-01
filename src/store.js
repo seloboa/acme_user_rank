@@ -64,6 +64,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...state.users, action.user],
+        name: '',
+        bio: '',
+        rank: 0,
       };
     default:
       return state;

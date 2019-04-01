@@ -46,6 +46,7 @@ const Nav = props => {
         path={'/users'}
         render={() => <Users users={props.users} />}
       />
+      <Route path={'/users/edit/:id'} render={props => <UserForm />} />
       <Route path={'/users/create'} component={UserForm} />
       <Route
         path={'/users/topRanked'}

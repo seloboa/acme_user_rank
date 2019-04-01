@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 
 const Users = props => {
@@ -16,7 +15,7 @@ const Users = props => {
           </span>
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <button className="btn btn-warning">Delete</button>
-            <NavLink to={`/users/${user.id}`}>Edit</NavLink>
+            <NavLink to={`/users/edit/${user.id}`}>Edit</NavLink>
           </div>
         </li>
       ))}
