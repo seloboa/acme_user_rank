@@ -14,7 +14,6 @@ const GET_USERS = 'GET_USERS';
 const WRITE_NAME = 'WRITE_NAME';
 const WRITE_BIO = 'WRITE_BIO';
 const WRITE_RANK = 'WRITE_RANK';
-const POST_USER = 'POST_USER';
 const GET_POSTED_USER = 'GET_POSTED_USER';
 
 //action creators
@@ -64,9 +63,7 @@ const reducer = (state = initialState, action) => {
     case GET_POSTED_USER:
       return {
         ...state,
-        name: action.user.name,
-        bio: action.user.bio,
-        rank: action.user.rank,
+        users: [...state.users, action.user],
       };
     default:
       return state;

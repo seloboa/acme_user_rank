@@ -4,12 +4,13 @@ import {connect} from 'react-redux';
 import {writeInfo, postUserToDb} from '../store';
 
 const UserForm = props => {
-  const {name, bio, rank, write, post} = props;
+  const {name, bio, rank, write, post, history} = props;
   return (
     <form
       onSubmit={e => {
         e.preventDefault();
         post({name, bio, rank});
+        history.push('/users');
       }}
     >
       <input
