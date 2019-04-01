@@ -48,6 +48,10 @@ const Nav = props => {
         render={() => <Users users={props.users} />}
       />
       <Route path={'/users/create'} component={UserForm} />
+      <Route
+        path={'/users/topRanked'}
+        render={() => <Users users={topRankedUsers} />}
+      />
     </Fragment>
   );
 };
