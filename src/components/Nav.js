@@ -15,7 +15,7 @@ const Nav = props => {
   console.log(topRankedUsers);
   return (
     <Fragment>
-      <ul className="nav nav-tabs">
+      <ul className="nav nav-tabs" style={{marginBottom: '10px'}}>
         <li className="nav-item">
           <NavLink exact to={'/'} className={'nav-link'}>
             Home
