@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {writeInfo, postUserToDb} from '../store';
 
 const UserForm = props => {
-  const {name, bio, rank, write, post, history} = props;
+  const {users, name, bio, rank, write, post, history, match} = props;
   return (
     <form
       onSubmit={e => {
@@ -18,14 +18,22 @@ const UserForm = props => {
         placeholder="name"
         name="WRITE_NAME"
         onChange={event => write(event.target.name, event.target.value)}
-        value={name}
+        value={
+          match.params.id && users
+            ? users.find(user => user.id == match.params.id).name
+            : name
+        }
       />
       <input
         className="form-control"
         placeholder="bio"
         name="WRITE_BIO"
         onChange={event => write(event.target.name, event.target.value)}
-        value={bio}
+        value={
+          match.params.id && users
+            ? users.find(user => user.id == match.params.id).bio
+            : bio
+        }
       />
       <input
         type="number"
@@ -33,11 +41,15 @@ const UserForm = props => {
         placeholder="rank"
         name="WRITE_RANK"
         onChange={event => write(event.target.name, event.target.value)}
-        value={rank > 0 ? rank : ''}
+        value={
+          match.params.id && users
+            ? users.find(user => user.id == match.params.id).rank
+            : rank
+        }
       />
       <div className="btn-group" style={{marginTop: '10px'}}>
         <button className="btn btn-primary" type="submit">
-          Create
+          {match.params.id ? 'Edit' : 'Create'}
         </button>
         <Link to="/users">
           <button className="btn btn-info">Cancel</button>

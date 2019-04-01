@@ -6,7 +6,7 @@ const initialState = {
   users: [],
   name: '',
   bio: '',
-  rank: 0,
+  rank: '',
 };
 
 //action constant

@@ -22,7 +22,7 @@ const Nav = props => {
         </li>
         <li className="nav-item">
           <NavLink exact to={'/users'} className={'nav-link'}>
-            Users ({(props.users.length)})
+            Users ({props.users.length})
           </NavLink>
         </li>
         <li className="nav-item">
@@ -46,7 +46,7 @@ const Nav = props => {
         path={'/users'}
         render={() => <Users users={props.users} />}
       />
-      <Route path={'/users/edit/:id'} render={props => <UserForm />} />
+      <Route path={'/users/edit/:id'} component={UserForm} />
       <Route path={'/users/create'} component={UserForm} />
       <Route
         path={'/users/topRanked'}
