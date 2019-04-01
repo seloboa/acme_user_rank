@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {writeInfo} from '../store';
+import {writeInfo, postUserToDb} from '../store';
 
 const UserForm = props => {
   const {name, bio, rank, write} = props;

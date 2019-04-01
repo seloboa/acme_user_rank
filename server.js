@@ -24,4 +24,15 @@ app.get('/api/users', async (req, res, next) => {
   }
 });
 
+app.post('/api/users',async(req,res,next)=>{
+  try{
+    await db.sync();
+    const newUser = await User.create(req.body);
+    console.log(newUser);
+    res.json(newUser);
+  }catch(err){
+    next(err);
+  }
+})
+
 app.listen(port, () => console.log(`listening on port ${port}`));
