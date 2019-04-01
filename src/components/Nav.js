@@ -3,8 +3,16 @@ import {NavLink, Route} from 'react-router-dom';
 import Users from './Users';
 import UserForm from './UserForm';
 import Home from './Home';
+import {connect} from 'react-redux';
 
-const Nav = () => {
+const Nav = props => {
+  const topRankedUsers = props.users.reduce((acc, cur) => {
+    if (acc.length <= 0 || cur.rank <= acc[0].rank) {
+      acc.push(cur);
+    }
+    return acc;
+  }, []);
+  console.log(topRankedUsers);
   return (
     <Fragment>
       <ul className="nav nav-tabs">
@@ -25,15 +33,27 @@ const Nav = () => {
         </li>
         <li className="nav-item">
           <NavLink to={'/users/topRanked'} className={'nav-link'}>
-            Top Ranked
+            Top Ranked (
+            {topRankedUsers.map((user, i) =>
+              i === topRankedUsers.length - 1 ? `${user.name}` : `${user.name} `
+            )}
+            )
           </NavLink>
         </li>
       </ul>
       <Route exact path={'/'} component={Home} />
-      <Route exact path={'/users'} component={Users} />
+      <Route
+        exact
+        path={'/users'}
+        render={() => <Users users={props.users} />}
+      />
       <Route path={'/users/create'} component={UserForm} />
     </Fragment>
   );
 };
 
-export default Nav;
+const mapStateToProps = state => ({
+  users: state.users,
+});
+
+export default connect(mapStateToProps)(Nav);
