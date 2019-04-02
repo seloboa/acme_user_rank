@@ -34,7 +34,8 @@
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --mode=development --watch",
     "start:dev": "npm run webpack:dev & nodemon server.js --ignore src/ --ignore dist/",
-    "seed": "node src/db/seed.js"
+    "seed": "node src/db/seed.js",
+    "heroku-postbuild": "webpack -p"
   },
   "keywords": [],
   "author": "",
