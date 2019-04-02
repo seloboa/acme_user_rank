@@ -58,7 +58,7 @@ export const postUserToDb = user => {
 export const updateUserToDb = user => {
   return async dispatch => {
     const response = await axios.put('/api/users', user);
-    const newUser = response.data;
+    const newUser = response.data[1][0];
     dispatch(getUpdateUser(newUser));
   };
 };
@@ -83,10 +83,13 @@ const reducer = (state = initialState, action) => {
         rank: 0,
       };
     case GET_UPDATED_USER: {
-      const newUsersArray = state.users.filter(
-        user => user.id !== action.user.id
+      const newUserArray = [...state.users];
+      newUserArray.splice(
+        state.users.findIndex(user => user.id === action.user.id),
+        1,
+        action.user
       );
-      return {...state, users: newUsersArray};
+      return {...state, users: newUserArray};
     }
     default:
       return state;

@@ -20,7 +20,7 @@ app.get('/', (req, res, next) =>
 app.get('/api/users', async (req, res, next) => {
   try {
     await db.sync();
-    const users = await User.findAll();
+    const users = await User.findAll({order: [['id', 'asc']]});
     res.json(users);
   } catch (err) {
     next(err);
@@ -31,7 +31,7 @@ app.post('/api/users', async (req, res, next) => {
   try {
     await db.sync();
     const newUser = await User.create(req.body);
-    res.json(newUser.get());
+    res.json(newUser);
   } catch (err) {
     next(err);
   }
@@ -40,7 +40,10 @@ app.post('/api/users', async (req, res, next) => {
 app.put('/api/users', async (req, res, next) => {
   try {
     await db.sync();
-    const newUser = await User.update(req.body, {where:{id: req.body.id}});
+    const newUser = await User.update(req.body, {
+      where: {id: req.body.id},
+      returning: true,
+    });
     res.json(newUser);
   } catch (err) {
     next(err);

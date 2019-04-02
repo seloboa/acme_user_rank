@@ -50,7 +50,9 @@ const Nav = props => {
       <Route path={'/users/create'} component={UserForm} />
       <Route
         path={'/users/topRanked'}
-        render={() => <Users users={topRankedUsers} />}
+        render={({history}) => (
+          <Users users={topRankedUsers} history={history} />
+        )}
       />
     </Fragment>
   );
@@ -60,6 +62,4 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-export default connect(
-  mapStateToProps
-)(Nav);
+export default connect(mapStateToProps)(Nav);
