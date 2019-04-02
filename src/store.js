@@ -15,6 +15,7 @@ const WRITE_NAME = 'WRITE_NAME';
 const WRITE_BIO = 'WRITE_BIO';
 const WRITE_RANK = 'WRITE_RANK';
 const GET_POSTED_USER = 'GET_POSTED_USER';
+const GET_UPDATED_USER = 'GET_UPDATED_USER';
 
 //action creators
 const getUsers = users => ({
@@ -32,6 +33,11 @@ const getPostedUser = user => ({
   user,
 });
 
+const getUpdateUser = user => ({
+  type: GET_UPDATED_USER,
+  user,
+});
+
 //thunk
 export const getUsersFromDb = () => {
   return async dispatch => {
@@ -46,6 +52,14 @@ export const postUserToDb = user => {
     const response = await axios.post('/api/users', user);
     const newUser = response.data;
     dispatch(getPostedUser(newUser));
+  };
+};
+
+export const updateUserToDb = user => {
+  return async dispatch => {
+    const response = await axios.put('/api/users', user);
+    const newUser = response.data;
+    dispatch(getUpdateUser(newUser));
   };
 };
 
@@ -68,6 +82,12 @@ const reducer = (state = initialState, action) => {
         bio: '',
         rank: 0,
       };
+    case GET_UPDATED_USER: {
+      const newUsersArray = state.users.filter(
+        user => user.id !== action.user.id
+      );
+      return {...state, users: newUsersArray};
+    }
     default:
       return state;
   }

@@ -1,16 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {writeInfo, postUserToDb} from '../store';
+import {writeInfo, postUserToDb, updateUserToDb} from '../store';
 
 const UserForm = props => {
-  const {users, name, bio, rank, write, post, history, match} = props;
-  console.log(props);
+  const {users, name, bio, rank, write, post, update, history, match} = props;
   return (
     <form
       onSubmit={e => {
         e.preventDefault();
-        post({name, bio, rank});
+        const id = match.params.id*1
+        match.params.id ? update({id, name, bio, rank}) : post({name, bio, rank});
         history.push('/users');
       }}
     >
@@ -19,22 +19,14 @@ const UserForm = props => {
         placeholder="name"
         name="WRITE_NAME"
         onChange={event => write(event.target.name, event.target.value)}
-        value={
-          match.params.id && users
-            ? users.find(user => user.id == match.params.id).name
-            : name
-        }
+        value={name}
       />
       <input
         className="form-control"
         placeholder="bio"
         name="WRITE_BIO"
         onChange={event => write(event.target.name, event.target.value)}
-        value={
-          match.params.id && users
-            ? users.find(user => user.id == match.params.id).bio
-            : bio
-        }
+        value={bio}
       />
       <input
         type="number"
@@ -42,11 +34,7 @@ const UserForm = props => {
         placeholder="rank"
         name="WRITE_RANK"
         onChange={event => write(event.target.name, event.target.value)}
-        value={
-          match.params.id && users
-            ? users.find(user => user.id == match.params.id).rank
-            : rank
-        }
+        value={rank}
       />
       <div className="btn-group" style={{marginTop: '10px'}}>
         <button className="btn btn-primary" type="submit">
@@ -70,6 +58,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   write: (field, data) => dispatch(writeInfo(field, data)),
   post: data => dispatch(postUserToDb(data)),
+  update: data => dispatch(updateUserToDb(data)),
 });
 
 export default connect(

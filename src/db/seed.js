@@ -6,7 +6,7 @@ const syncAndSeed = () => {
     .then(() => {
       return Promise.all([
         User.create({name: 'moe', bio: 'moe is fun', rank: 1}),
-        User.create({name: 'lary', bio: 'larry is tall', rank: 2}),
+        User.create({name: 'larry', bio: 'larry is tall', rank: 2}),
         User.create({name: 'curly', bio: 'curly is big', rank: 2}),
       ]);
     })

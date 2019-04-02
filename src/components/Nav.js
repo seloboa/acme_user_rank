@@ -44,7 +44,7 @@ const Nav = props => {
       <Route
         exact
         path={'/users'}
-        render={() => <Users users={props.users} />}
+        render={({history}) => <Users users={props.users} history={history} />}
       />
       <Route path={'/users/edit/:id'} component={UserForm} />
       <Route path={'/users/create'} component={UserForm} />
@@ -60,4 +60,6 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(
+  mapStateToProps
+)(Nav);

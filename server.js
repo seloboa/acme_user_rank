@@ -27,14 +27,24 @@ app.get('/api/users', async (req, res, next) => {
   }
 });
 
-app.post('/api/users',async(req,res,next)=>{
-  try{
+app.post('/api/users', async (req, res, next) => {
+  try {
     await db.sync();
     const newUser = await User.create(req.body);
     res.json(newUser.get());
-  }catch(err){
+  } catch (err) {
     next(err);
   }
-})
+});
+
+app.put('/api/users', async (req, res, next) => {
+  try {
+    await db.sync();
+    const newUser = await User.update(req.body, {where:{id: req.body.id}});
+    res.json(newUser);
+  } catch (err) {
+    next(err);
+  }
+});
 
 app.listen(port, () => console.log(`listening on port ${port}`));
